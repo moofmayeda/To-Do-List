@@ -1,21 +1,12 @@
-$(document).ready (function() {
-  $("form#new-contact").submit(function(event) {
-    var inputtedFirstName = $("input#new-first-name").val();
-    var inputtedLastName = $("input#new-last-name").val();
-    var inputtedAddress = $("input#new-address").val();
-    console.log(inputtedAddress);
-    var contact = {firstName: inputtedFirstName, lastName: inputtedLastName, address: inputtedAddress};
-    $("ul").append("<li>"+contact.firstName+ " "+contact.lastName+"</li>");
-    $("#show-contacts").show();
-    $("input#new-first-name").val("");
-    $("input#new-last-name").val("");
-    $("input#new-address").val("");
-    $("li").last().click(function() {
-      $("#show-details").show();
-      $("#first-name").text(contact.firstName);
-      $("#last-name").text(contact.lastName);
-      $("#address").text(contact.address);
-    });
+$(document).ready(function() {
+  $("form").submit(function(event) {
     event.preventDefault();
+    var newTask = $("input#new-task").val();
+    var taskItem = {task: newTask, completed: false};
+    $("tbody").append("<tr><td>"+taskItem.task+"</td><td><input type='checkbox' id='task-status'></td></tr>");
+    $("input#new-task").val("");
+    $("input#task-status").last().click(function() {
+      taskItem.completed = true;
+    });
   });
 });
