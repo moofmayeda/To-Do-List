@@ -1,7 +1,7 @@
 var loadTasks = function(list) {
   $("tbody").empty();
   list.tasks.forEach(function(task) {
-    $("tbody").append("<div class='task-row'><tr><td>"+task.task+"</td><td><input type='checkbox' id='task-status'></td></tr></div>");
+    $("tbody").append("<div class='task-row'><tr><td>"+task.task+"</td><td><input type='checkbox' id='task-status'>"+task.completed + "</td></tr></div>");
   });
 };
 $(document).ready(function() {
@@ -28,7 +28,13 @@ $(document).ready(function() {
     $("tbody").append("<div class='task-row'><tr><td>"+taskItem.task+"</td><td><input type='checkbox' id='task-status'></td></tr></div>");
     $("input#new-task").val("");
     $("input#task-status").last().click(function() {
-      taskItem.completed = true;
+      if (!taskItem.completed) {
+        $(this).parent().css("text-decoration","line-through");
+        taskItem.completed = true;
+      } else {
+        taskItem.completed = false;
+        alert(taskItem.completed);
+      };
     });
   });
 });
